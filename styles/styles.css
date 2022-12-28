@@ -1,0 +1,37 @@
+/***** Fonts *****/
+@font-face {
+  font-family: 'hk-m';
+  src: url('../fonts/hk-grotesk.medium.ttf') format('truetype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'hk-s-b';
+  src: url('../fonts/hk-grotesk.semibold.ttf') format('truetype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'hk-b';
+  src: url('../fonts/hk-grotesk.bold.ttf') format('truetype');
+  font-style: normal;
+}
+
+/***** Reset *****/
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font: 'hk-m' 1.6rem;
+}
+
+/***** Styles *****/
