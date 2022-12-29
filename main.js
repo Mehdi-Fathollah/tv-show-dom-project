@@ -142,3 +142,20 @@ renderHeader();
 renderMain();
 renderFooter();
 CardData();
+
+let searchInputBox = document.querySelector('.nav__search-box-input');
+searchInputBox.addEventListener('input', () => {
+  const episodeCards = document.querySelectorAll('.card');
+  const value = searchInputBox.value.toLowerCase();
+
+  episodeCards.forEach((eachCards) => {
+    const episodeCardNames = eachCards
+      .querySelector('.card__episode-name')
+      .innerText.toLowerCase();
+    if (episodeCardNames.includes(value)) {
+      eachCards.classList.remove('hide');
+    } else {
+      eachCards.classList.add('hide');
+    }
+  });
+});

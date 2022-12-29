@@ -199,3 +199,7 @@ a {
   color: var(--gray);
   text-transform: capitalize;
 }
+
+.hide {
+  display: none;
+}
