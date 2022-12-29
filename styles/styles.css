@@ -18,6 +18,13 @@
 }
 
 /***** Reset *****/
+:root {
+  --primary: #20bfe1;
+  --white: #f0efef;
+  --black: #000;
+  --gray: #777;
+  --bg-color: #171717;
+}
 *,
 *::after,
 *::before {
@@ -31,7 +38,164 @@ html {
 }
 
 body {
-  font: 'hk-m' 1.6rem;
+  font: 1.6rem 'hk-m';
+  background-color: var(--bg-color);
+  color: var(--white);
+}
+
+a {
+  text-decoration: none;
 }
 
 /***** Styles *****/
+/* Header */
+.header {
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.nav {
+  margin-top: 5rem;
+  display: flex;
+  align-items: center;
+}
+
+.nav__search-box {
+  width: 50rem;
+  height: 5rem;
+  padding: 0 2rem;
+  background-color: var(--white);
+  border-radius: 5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 0 auto;
+}
+
+.nav__search-box-input {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font: 1.5rem 'hk-m';
+  flex-grow: 1;
+}
+
+.nav__search-box-input::placeholder {
+  color: var(--gray);
+}
+
+/* Main */
+.main {
+  margin-top: 10rem;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.episodes__title {
+  font: 5.5rem 'hk-b';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cards {
+  margin-top: 8rem;
+  padding: 0 5%;
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 25rem;
+  height: 33rem;
+  display: flex;
+  flex-direction: column;
+  background-color: #000;
+  border: 0.1rem solid var(--gray);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.card__information {
+  padding: 1.8rem;
+}
+
+.card__upper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card__img {
+  display: block;
+}
+
+.card__episode-name,
+.card__episode-number,
+.card__episode-caption,
+.card__episode-link {
+  font-family: 'hk-b';
+}
+
+.card__episode-name {
+  font-size: 1.9rem;
+}
+
+.card__episode-number {
+  font-size: 1.4rem;
+  background-color: #c02424;
+  padding: 0.2rem;
+}
+
+.card__episode-caption {
+  font-size: 1.3rem;
+  margin: 2rem 0;
+  color: #929292;
+}
+
+.card__episode-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 2.8rem;
+  background-color: var(--primary);
+  font-size: 1.3rem;
+  color: var(--black);
+  cursor: pointer;
+  border-radius: 0.8rem;
+  transition: all 200ms ease;
+}
+
+.card__episode-link:hover {
+  background-color: transparent;
+  color: var(--white);
+  border: 0.1rem solid var(--white);
+}
+
+/* Footer */
+.footer {
+  background-image: url('../images/shapes/shape.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  margin-top: 20rem;
+  height: 24rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: var(--black);
+  flex-direction: column;
+}
+
+.footer__title {
+  font: 1.7rem 'hk-b';
+  margin-bottom: 1rem;
+}
+
+.footer__author-name {
+  font: 1.5rem 'hk-b';
+  color: var(--gray);
+  text-transform: capitalize;
+}
