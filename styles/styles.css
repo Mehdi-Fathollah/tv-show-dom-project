@@ -108,13 +108,13 @@ a {
 
 .card {
   width: 25rem;
-  height: 33rem;
   display: flex;
   flex-direction: column;
   background-color: #000;
   border: 0.1rem solid var(--gray);
   border-radius: 1rem;
   overflow: hidden;
+  justify-content: space-between;
 }
 
 .card__information {

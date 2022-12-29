@@ -44,23 +44,25 @@ let renderMain = () => {
   //   episodes title
   const episodesTitle = document.createElement('h1');
   episodesTitle.classList.add('episodes__title');
-  episodesTitle.innerText = 'Episodes';
+  episodesTitle.innerText = 'Game OF Thrones Episodes';
   episodesSection.append(episodesTitle);
 
   //   episodes cards
   const episodesCards = document.createElement('div');
   episodesCards.classList.add('cards');
   episodesSection.append(episodesCards);
+};
 
+let renderEachCards = (data) => {
   // Card Div
   const episodesCard = document.createElement('div');
   episodesCard.classList.add('card');
-  episodesCards.append(episodesCard);
+  body.querySelector('.cards').append(episodesCard);
 
   // Card Image
   const cardImage = document.createElement('img');
   cardImage.classList.add('card__img');
-  cardImage.src = null;
+  cardImage.src = data.image.medium;
   episodesCard.append(cardImage);
 
   // Card Information
@@ -76,26 +78,36 @@ let renderMain = () => {
   // Card Episode Name
   const cardEpisodeName = document.createElement('h3');
   cardEpisodeName.classList.add('card__episode-name');
-  cardEpisodeName.innerText = null;
+  cardEpisodeName.innerText = data.name;
   cardUpper.append(cardEpisodeName);
 
   // Card Episode Number
-  const cardEpisodeNUmber = document.createElement('h4');
-  cardEpisodeNUmber.classList.add('card__episode-number');
-  cardEpisodeNUmber.innerText = null;
-  cardUpper.append(cardEpisodeNUmber);
+  const cardEpisodeNumber = document.createElement('h4');
+  cardEpisodeNumber.classList.add('card__episode-number');
+  cardEpisodeNumber.innerText = `S${String(data.season).padStart(
+    2,
+    '0'
+  )}E${String(data.number).padStart(2, '0')}`;
+  cardUpper.append(cardEpisodeNumber);
 
   // Card Episode Caption
   const cardEpisodeCaption = document.createElement('p');
   cardEpisodeCaption.classList.add('card__episode-caption');
-  cardEpisodeCaption.innerText = null;
+  cardEpisodeCaption.innerText = data.summary;
+  cardEpisodeCaption.innerText = cardEpisodeCaption.innerText
+    .replaceAll('<p>', '')
+    .replaceAll('</p>', '')
+    .replaceAll('<br>', '');
+  if (data.summary.length > 100)
+    cardEpisodeCaption.innerText =
+      cardEpisodeCaption.innerText.substring(0, 100) + '...';
   cardInformation.append(cardEpisodeCaption);
 
   // Card Episode Link
   const cardEpisodeLink = document.createElement('a');
   cardEpisodeLink.classList.add('card__episode-link');
   cardEpisodeLink.innerText = 'Watch movie';
-  cardEpisodeLink.href = null;
+  cardEpisodeLink.href = data.url;
   cardInformation.append(cardEpisodeLink);
 };
 
@@ -118,6 +130,15 @@ let renderFooter = () => {
   footer.append(footerAuthor);
 };
 
+let CardData = async () => {
+  let data = await fetch('https://api.tvmaze.com/shows/82/episodes');
+  let finalData = await data.json();
+  finalData.forEach((element) => {
+    renderEachCards(element);
+  });
+};
+
 renderHeader();
 renderMain();
 renderFooter();
+CardData();
