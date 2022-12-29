@@ -1,8 +1,4 @@
-// Elements
 const body = document.body;
-
-const main = document.createElement('main');
-const footer = document.createElement('footer');
 
 let renderHeader = () => {
   // header
@@ -33,7 +29,6 @@ let renderHeader = () => {
   searchBox.append(seacrhIcon);
   searchBox.append(searchInput);
 };
-renderHeader();
 
 let renderMain = () => {
   // main
@@ -103,7 +98,6 @@ let renderMain = () => {
   cardEpisodeLink.href = null;
   cardInformation.append(cardEpisodeLink);
 };
-renderMain();
 
 let renderFooter = () => {
   // Footer
@@ -114,13 +108,16 @@ let renderFooter = () => {
   //   Footer Title
   const footerTitle = document.createElement('h4');
   footerTitle.classList.add('footer__title');
-  footerTitle.innerText = 'This website is built using tvmaze 💖🍵';
+  footerTitle.innerText = 'This website is built using TvMaze 💖🍵';
   footer.append(footerTitle);
 
   //   Footer Name
   const footerAuthor = document.createElement('h5');
   footerAuthor.classList.add('footer__author-name');
-  footerAuthor.innerText = 'Mehdi Fathollah';
+  footerAuthor.innerText = 'Mehdi Fathollah 💕';
   footer.append(footerAuthor);
 };
+
+renderHeader();
+renderMain();
 renderFooter();
