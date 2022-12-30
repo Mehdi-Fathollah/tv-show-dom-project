@@ -1,5 +1,16 @@
 const body = document.body;
 
+// Get Data
+let CardData = async () => {
+  let data = await fetch('https://api.tvmaze.com/shows/5/episodes');
+  let finalData = await data.json();
+  finalData.forEach((element) => {
+    renderEachCards(element);
+    renderOptionsInPage(element);
+  });
+};
+
+// Render Header
 let renderHeader = () => {
   // header
   const header = document.createElement('header');
@@ -28,8 +39,18 @@ let renderHeader = () => {
   navigation.append(searchBox);
   searchBox.append(seacrhIcon);
   searchBox.append(searchInput);
+
+  // Select and Options
+  const selectEpisodes = document.createElement('select');
+  selectEpisodes.classList.add('nav__select-episodes');
+  let defaultOption = document.createElement('option');
+  defaultOption.classList.add('default-option');
+  defaultOption.innerText = 'Select Episode';
+  selectEpisodes.append(defaultOption);
+  navigation.append(selectEpisodes);
 };
 
+// Render Main
 let renderMain = () => {
   // main
   const main = document.createElement('main');
@@ -44,7 +65,7 @@ let renderMain = () => {
   //   episodes title
   const episodesTitle = document.createElement('h1');
   episodesTitle.classList.add('episodes__title');
-  episodesTitle.innerText = 'Game OF Thrones Episodes';
+  episodesTitle.innerText = 'True Detective Episodes';
   episodesSection.append(episodesTitle);
 
   //   episodes cards
@@ -53,10 +74,12 @@ let renderMain = () => {
   episodesSection.append(episodesCards);
 };
 
+// Render Each Of Card
 let renderEachCards = (data) => {
   // Card Div
   const episodesCard = document.createElement('div');
   episodesCard.classList.add('card');
+  episodesCard.id = data.name;
   body.querySelector('.cards').append(episodesCard);
 
   // Card Image
@@ -108,9 +131,34 @@ let renderEachCards = (data) => {
   cardEpisodeLink.classList.add('card__episode-link');
   cardEpisodeLink.innerText = 'Watch movie';
   cardEpisodeLink.href = data.url;
+  cardEpisodeLink.target = '_blank';
   cardInformation.append(cardEpisodeLink);
 };
 
+// Render Options In Page
+let renderOptionsInPage = (data) => {
+  const selectOptions = document.createElement('option');
+  selectOptions.classList.add('select-options');
+  let selectEl = document.querySelector('.nav__select-episodes');
+  selectOptions.innerText = `${data.name} || S${String(data.season).padStart(
+    2,
+    '0'
+  )}E${String(data.number).padStart(2, '0')}`;
+
+  selectOptions.value = data.url;
+  selectEl.append(selectOptions);
+
+  let defaultOption = document.querySelector('.default-option');
+
+  selectEl.addEventListener('change', () => {
+    if (selectEl.value !== defaultOption.innerText) {
+      defaultOption.setAttribute('disabled', 'true');
+      window.open(selectEl.value);
+    }
+  });
+};
+
+// Render Footer
 let renderFooter = () => {
   // Footer
   const footer = document.createElement('footer');
@@ -118,9 +166,11 @@ let renderFooter = () => {
   body.querySelector('.main').insertAdjacentElement('afterend', footer);
 
   //   Footer Title
-  const footerTitle = document.createElement('h4');
+  const footerTitle = document.createElement('a');
   footerTitle.classList.add('footer__title');
   footerTitle.innerText = 'This website is built using TvMaze 💖🍵';
+  footerTitle.href = 'https://www.tvmaze.com/api#licensing';
+  footerTitle.target = '_blank';
   footer.append(footerTitle);
 
   //   Footer Name
@@ -130,19 +180,12 @@ let renderFooter = () => {
   footer.append(footerAuthor);
 };
 
-let CardData = async () => {
-  let data = await fetch('https://api.tvmaze.com/shows/82/episodes');
-  let finalData = await data.json();
-  finalData.forEach((element) => {
-    renderEachCards(element);
-  });
-};
-
 renderHeader();
 renderMain();
 renderFooter();
 CardData();
 
+// Search Input
 let searchInputBox = document.querySelector('.nav__search-box-input');
 searchInputBox.addEventListener('input', () => {
   const episodeCards = document.querySelectorAll('.card');
